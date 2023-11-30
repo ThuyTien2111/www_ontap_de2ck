@@ -1,10 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Tài khoản của bạn</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-$END$
+<div class="container">
+    <h2>Tài khoản của bạn</h2>
+    <h4>Thông tin cá nhân</h4>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Tên khách hàng</th>
+            <th>Ngày sinh</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+            <th>Tên ngân hàng</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${customer.getCus_name()}"></td>
+            <td th:text="${#temporals.format(customer.getDob(), 'yyyy-MM-dd')}"></td>
+            <td th:text="${customer.getEmail()}"></td>
+            <td th:text="${customer.getPhone()}"></td>
+            <td th:text="${customer.getBank().getBank_name()}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div style="border: 1px solid black; border-width: 1px; border-color: black; border-radius: 10px; padding: 10px">
+        <h4>Thông tin tài khoản chính</h4>
+        <h5>Số tài khoản: <span th:text="${mainAcc.getAcc_no()}"></span></h5>
+        <h5>Số dư: <span th:text="${mainAcc.getBalance()}+'$'"></span></h5>
+        <a class="btn btn-success">Chuyển tiền</a>
+        <a class="btn btn-primary" th:href="@{'/history/'+${mainAcc.getAcc_no()}}">Lịch sử giao dịch</a>
+    </div>
+    <p></p>
+    <h4>Danh sách tài khoản tín dụng</h4>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Số tài khoản</th>
+            <th>Số dư</th>
+            <th>Số dư tối thiểu</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="checkAcc:${checkingAccounts}">
+            <td th:text="${checkAcc.getAccount().getAcc_no()}"></td>
+            <td th:text="${checkAcc.getAccount().getBalance()}+'$'"></td>
+            <td th:text="${checkAcc.getMinimum_balance()}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <h4>Danh sách tài khoản tiết kiệm</h4>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Số tài khoản</th>
+            <th>Số dư</th>
+            <th>Lãi suất</th>
+            <th>Ngày đến hạn</th>
+            <th>Lãi cuối kỳ</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry:${map}">
+            <td th:text="${entry.getKey().getAccount().getAcc_no()}"></td>
+            <td th:text="${entry.getKey().getAccount().getBalance()}+'$'"></td>
+            <td th:text="${entry.getKey().getInterest_rate()}"></td>
+            <td th:text="${#temporals.format(entry.getKey().getLimit_date(), 'yyyy-MM-dd')}"></td>
+            <td th:text="${entry.getValue()}+'$'"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

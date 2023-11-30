@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm nhân viên quản lý</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Thêm nhân viên quản lý</h2>
+    <form method="post" th:action="@{'/add-manager/'+${manID}}">
+        <div class="form-group">
+            <label for="name">Tên quản lý</label>
+            <input name="name" id="name" class="form-control" type="text"  >
+        </div>
+        <div class="form-group">
+            <label for="phone">Số diện thoại</label>
+            <input name="phone" id="phone" class="form-control" type="text"  >
+        </div>
+        <button type="submit" class="btn btn-lg btn-block btn-success">Xác nhận thêm</button>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

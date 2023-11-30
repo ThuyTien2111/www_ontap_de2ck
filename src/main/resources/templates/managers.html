@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý nhân viên ngân hàng</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Quản lý nhân viên ngân hàng</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Tên quản lý</th>
+            <th>Số điện thoại</th>
+            <th>Trạng thái</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="m:${managers}">
+            <td th:text="${m.getMan_name()}"></td>
+            <td th:text="${m.getPhone()}"></td>
+            <td>
+                <span style="color: red" th:if="${m.getStatus()==0}" th:text="STOPPED"></span>
+                <span style="color: limegreen" th:if="${m.getStatus()==1}" th:text="ACTIVATED"></span>
+                <span style="color: sandybrown" th:if="${m.getStatus()==2}" th:text="TERMINATED"></span>
+            </td>
+            <td>
+                <a class="btn btn-warning" th:href="@{'/update-manager/'+${manID}+'/'+${m.getMan_id()}}">Sửa</a>
+                <a class="btn btn-danger" th:href="@{'/delete-manager/'+${manID}+'/'+${m.getMan_id()}}">Xóa</a>
+                <a class="btn btn-info" th:href="@{'/active-manager/'+${manID}+'/'+${m.getMan_id()}}">Active</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" th:href="@{'/add-manager/'+${manID}}">Thêm nhân viên quản lý</a>
+    <a class="btn btn-warning" th:href="@{/max-balance}">Xem khách hàng tiềm năng</a>
+    <a class="btn btn-danger" th:href="@{/not-transaction}">Giới thiệu vay tín dụng</a>
+    <p></p>
+    <!-- Pagination -->
+    <div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <!-- Page Links -->
+                <li th:each="i : ${#numbers.sequence(0, totalManager - 1)}" th:class="${currentPage == i} ? 'page-item active' : 'page-item'">
+                    <a class="page-link" th:href="@{'/managers/'+${manID} + '?page=' + ${i} + '&size=' + ${pageSize}}" th:text="${i + 1}"></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

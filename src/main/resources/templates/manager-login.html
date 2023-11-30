@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng nhập dành cho quản lý</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Đăng nhập với tư cách quản lý</h2>
+    <div class="alert alert-danger" th:if="${error!=null and not #strings.isEmpty(error)}" th:text="${error}"></div>
+    <form method="post" th:action="@{/manager-login}">
+        <div class="form-group">
+            <label for="username">Mã quản lý: </label>
+            <input class="form-control" id="username" name="username" type="text">
+        </div>
+        <div class="form-group">
+            <label for="password">Mật khẩu: </label>
+            <input class="form-control" id="password" name="password" type="password">
+        </div>
+        <button type="submit" class="btn btn-success btn-lg btn-block">Đăng nhập</button>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

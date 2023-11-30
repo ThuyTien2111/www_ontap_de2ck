@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách khách hàng có nhu cầu vay</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Giới thiệu vay tín dụng</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Tên khách hàng</th>
+            <th>Số tài khoản</th>
+            <th>Số dư</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="acc:${accounts}">
+            <td th:text="${acc.getAccount().getCustomer().getCus_name()}"></td>
+            <td th:text="${acc.getAccount().getAcc_no()}"></td>
+            <td th:text="${acc.getAccount().getBalance()}"></td>
+            <td th:text="${acc.getAccount().getCustomer().getEmail()}"></td>
+            <td th:text="${acc.getAccount().getCustomer().getPhone()}"></td>
+            <td>
+<!--                khong dung th:href ma de trong -->
+                <a href="" class="btn btn-info">Giới thiệu</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
